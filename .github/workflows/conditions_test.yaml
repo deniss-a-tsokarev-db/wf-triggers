@@ -1,6 +1,6 @@
 name: "Test WF Conditions"
 on:
-  pull_request_target:
+  pull_request:
     branches:
       - pdev
       - dev
@@ -30,34 +30,34 @@ jobs:
       - name: Print branch
         shell: bash
         run: |-
-          echo ${{ github.head_ref }}
+          echo ${{ github.base_ref }}
       
       - name: Setup env for PDEV
-        if: ${{ github.ref_name == 'pdev' || github.head_ref == 'pdev' }}
+        if: ${{ github.ref_name == 'pdev' || github.base_ref == 'pdev' }}
         shell: bash
         run: |-
           echo "Setting up environment for PDEV..."
       
       - name: Setup env for DEV
-        if: ${{ github.ref_name == 'dev' || github.head_ref == 'dev' }}
+        if: ${{ github.ref_name == 'dev' || github.base_ref == 'dev' }}
         shell: bash
         run: |-
           echo "Setting up environment for DEV..."
       
       - name: Setup env for SIT
-        if: ${{ github.ref_name == 'sit' || github.head_ref == 'sit' }}
+        if: ${{ github.ref_name == 'sit' || github.base_ref == 'sit' }}
         shell: bash
         run: |-
           echo "Setting up environment for SIT..."
       
       - name: Setup env for UAT
-        if: ${{ github.ref_name == 'uat' || github.head_ref == 'uat' }}
+        if: ${{ github.ref_name == 'uat' || github.base_ref == 'uat' }}
         shell: bash
         run: |-
           echo "Setting up environment for UAT..."
       
       - name: Setup env for PRD
-        if: ${{ github.ref_name == 'prd' || github.head_ref == 'prd' }}
+        if: ${{ github.ref_name == 'prd' || github.base_ref == 'prd' }}
         shell: bash
         run: |-
           echo "Setting up environment for PRD..."
