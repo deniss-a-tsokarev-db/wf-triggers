@@ -1,0 +1,74 @@
+name: "Test WF Conditions"
+on:
+  pull_request:
+    types:
+      - synchronize
+      - opened
+      - reopened
+    branches:
+      - pdev
+      - dev
+      - sit
+      - uat
+      - prd
+  push:
+    branches:
+      - pdev
+      - dev
+      - sit
+      - uat
+      - prd
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    permissions:
+      contents: 'read'
+      id-token: 'write'
+    
+    steps:
+      - name: Repo checkout
+        uses: actions/checkout@v3
+      
+      - name: Setup env for PDEV
+        if: {{ github.ref_name == 'pdev' || github.head_ref == 'pdev' }}
+        shell: bash
+        run: |-
+          echo "Setting up environment for PDEV..."
+      
+      - name: Setup env for DEV
+        if: {{ github.ref_name == 'dev' || github.head_ref == 'dev' }}
+        shell: bash
+        run: |-
+          echo "Setting up environment for DEV..."
+      
+      - name: Setup env for SIT
+        if: {{ github.ref_name == 'sit' || github.head_ref == 'sit' }}
+        shell: bash
+        run: |-
+          echo "Setting up environment for SIT..."
+      
+      - name: Setup env for UAT
+        if: {{ github.ref_name == 'uat' || github.head_ref == 'uat' }}
+        shell: bash
+        run: |-
+          echo "Setting up environment for UAT..."
+      
+      - name: Setup env for PRD
+        if: {{ github.ref_name == 'prd' || github.head_ref == 'prd' }}
+        shell: bash
+        run: |-
+          echo "Setting up environment for PRD..."
+
+     - name: Dry run
+        if: {{ github.ref_name == 'prd' || github.head_ref == 'prd' }}
+        shell: bash
+        run: |-
+          echo "Dry run..."
+
+     - name: Apply changes
+        if: {{ github.ref_name == 'prd' || github.head_ref == 'prd' }}
+        shell: bash
+        run: |-
+          echo "Applying changes..."
