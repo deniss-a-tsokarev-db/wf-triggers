@@ -1,6 +1,6 @@
 name: "Test WF Conditions"
 on:
-  pull_request:
+  pull_request_target:
     branches:
       - pdev
       - dev
