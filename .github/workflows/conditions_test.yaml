@@ -27,6 +27,11 @@ jobs:
       - name: Repo checkout
         uses: actions/checkout@v3
       
+      - name: Print branch
+        shell: bash
+        run: |-
+          echo ${{ github.head_ref }}
+      
       - name: Setup env for PDEV
         if: ${{ github.ref_name == 'pdev' || github.head_ref == 'pdev' }}
         shell: bash
