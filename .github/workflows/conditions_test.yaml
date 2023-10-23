@@ -18,11 +18,11 @@ on:
 jobs:
   test-conditions:
     runs-on: ubuntu-latest
-    
+
     permissions:
       contents: 'read'
       id-token: 'write'
-    
+
     steps:
       - name: Repo checkout
         uses: actions/checkout@v3
@@ -57,14 +57,14 @@ jobs:
         run: |-
           echo "Setting up environment for PRD..."
 
-     - name: Dry run
-        if: {{ github.ref_name == 'prd' || github.head_ref == 'prd' }}
-        shell: bash
-        run: |-
-          echo "Dry run..."
+     # - name: Dry run
+     #    if: {{ github.ref_name == 'prd' || github.head_ref == 'prd' }}
+     #    shell: bash
+     #    run: |-
+     #      echo "Dry run..."
 
-     - name: Apply changes
-        if: {{ github.ref_name == 'prd' || github.head_ref == 'prd' }}
-        shell: bash
-        run: |-
-          echo "Applying changes..."
+     # - name: Apply changes
+     #    if: {{ github.ref_name == 'prd' || github.head_ref == 'prd' }}
+     #    shell: bash
+     #    run: |-
+     #      echo "Applying changes..."
